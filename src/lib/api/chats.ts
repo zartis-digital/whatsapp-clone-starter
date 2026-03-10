@@ -2,28 +2,31 @@ import { apiClient } from "@/lib/api-client"
 import type { Chat, Message } from "@/components/chat/types"
 
 export async function fetchChats(): Promise<Chat[]> {
-  const { data } = await apiClient.get("/chats")
-  return data
+  // TODO: replace with real API call
+  const { initialChats } = await import("@/lib/data")
+  return initialChats
 }
 
 export async function fetchChat(chatId: string): Promise<Chat> {
-  const { data } = await apiClient.get(`/chats/${chatId}`)
-  return data
+  // TODO: replace with real API call
+  const { initialChats } = await import("@/lib/data")
+  const chat = initialChats.find((c) => c.id === chatId)
+  if (!chat) throw new Error(`Chat ${chatId} not found`)
+  return chat
 }
 
 export async function fetchChatDetails(chatId: string): Promise<Chat> {
-  const { data } = await apiClient.get(`/chats/${chatId}`)
-  return data
+  return fetchChat(chatId)
 }
 
 export async function fetchMessages(
   chatId: string,
-  cursor?: string,
+  _cursor?: string,
 ): Promise<{ items: Message[]; nextCursor: string | null }> {
-  const { data } = await apiClient.get(`/chats/${chatId}/messages`, {
-    params: cursor ? { cursor } : undefined,
-  })
-  return data
+  // TODO: replace with real API call
+  const { initialMessages } = await import("@/lib/data")
+  const items = (initialMessages[chatId] ?? []).slice().reverse()
+  return { items, nextCursor: null }
 }
 
 export async function updateChatSettings(
