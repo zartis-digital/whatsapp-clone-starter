@@ -12,7 +12,6 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import { SentIcon, UserGroupIcon } from "@hugeicons/core-free-icons"
 import type { Chat, Message } from "./types"
 import { MessageBubble } from "./message-bubble"
-import { EmojiPicker } from "./emoji-picker"
 
 
 interface ChatPanelProps {
@@ -105,14 +104,6 @@ export function ChatPanel({ chat, messages, currentUserId, onSendMessage, onInpu
       {/* Input */}
       <form onSubmit={handleSubmit} className="border-t border-border bg-card p-4">
         <InputGroup className="h-10">
-          <InputGroupAddon align="inline-start">
-            <EmojiPicker
-              onEmojiSelect={(emoji) => {
-                setInputValue((prev) => prev + emoji)
-                inputRef.current?.focus()
-              }}
-            />
-          </InputGroupAddon>
           <InputGroupInput
             ref={inputRef}
             placeholder="Type a message..."
