@@ -1,4 +1,4 @@
-import { apiClient } from "@/lib/api-client"
+import type { Chat } from "@/components/chat/types"
 
 export interface User {
   id: string
@@ -33,32 +33,34 @@ export type PendingRequest = InboundRequest | OutboundRequest
 
 // Get accepted contacts
 export async function fetchContacts(): Promise<Contact[]> {
-  const response = await apiClient.get<Contact[]>("/contacts")
-  return response.data
+  // TODO: replace with real API call
+  const { mockContacts } = await import("@/lib/data")
+  return mockContacts
 }
 
 // Get pending contact requests (inbound + outbound)
 export async function fetchPendingRequests(): Promise<PendingRequest[]> {
-  const response = await apiClient.get<PendingRequest[]>("/contacts/pending")
-  return response.data
+  // TODO: replace with real API call
+  const { mockPendingRequests } = await import("@/lib/data")
+  return mockPendingRequests
 }
 
 // Send a contact request
-export async function sendContactRequest(userId: string): Promise<void> {
-  await apiClient.post("/contacts", { userId })
+export async function sendContactRequest(_userId: string): Promise<void> {
+  // TODO: replace with real API call
 }
 
 // Accept a contact request
-export async function acceptContactRequest(contactId: string): Promise<void> {
-  await apiClient.patch(`/contacts/${contactId}`, { action: "accept" })
+export async function acceptContactRequest(_contactId: string): Promise<void> {
+  // TODO: replace with real API call
 }
 
 // Reject a contact request
-export async function rejectContactRequest(contactId: string): Promise<void> {
-  await apiClient.patch(`/contacts/${contactId}`, { action: "reject" })
+export async function rejectContactRequest(_contactId: string): Promise<void> {
+  // TODO: replace with real API call
 }
 
 // Remove a contact
-export async function removeContact(contactId: string): Promise<void> {
-  await apiClient.delete(`/contacts/${contactId}`)
+export async function removeContact(_contactId: string): Promise<void> {
+  // TODO: replace with real API call
 }
