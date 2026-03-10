@@ -872,8 +872,8 @@ Change the app's color palette from WhatsApp green to Anthropic brand colors. Lo
       <div class="prompt-box">
         <span class="prompt-label">Prompt</span>
         <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
-Think hard and plan how you would add an emoji picker to the chat message input. Don't implement yet &mdash; just show me the plan.</div>
-      <p style="margin-top:0.5rem;">Observe the plan output. When you approve it, Claude will transition to implementation in the next step.</p>
+Think hard and plan how you would add an emoji picker to the chat message input. Don't implement yet &mdash; save the plan to feature/emoji-picker/PLAN.md</div>
+      <p style="margin-top:0.5rem;">Observe the plan output. Claude will persist it to <code>feature/emoji-picker/PLAN.md</code> so you can reference it in the next step.</p>
 
       <div class="callout" style="margin:0.75rem 0;">
         <span class="callout-icon">&#x1f4a1;</span>
@@ -934,7 +934,7 @@ Start the dev server with pnpm dev</div>
           <div class="prompt-box">
             <span class="prompt-label">Prompt</span>
             <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
-Add an emoji picker to the chat message input in ChatPanel. Place a smiley face icon button to the left of the text input. Clicking it should open a shadcn Popover (side="top") with categorized emoji tabs (Smileys, People, Animals, Food, Travel, Objects, Symbols). Each category shows a grid of hardcoded emoji strings. Clicking an emoji inserts it into the message input and keeps the popover open. Do not use any third-party emoji picker library — build it with hardcoded emoji strings and shadcn/ui primitives only. Create a new EmojiPicker component in src/components/chat/ and integrate it into ChatPanel.</div>
+Implement the emoji picker feature following the plan in @feature/emoji-picker/PLAN.md</div>
         </div>
       </details>
 

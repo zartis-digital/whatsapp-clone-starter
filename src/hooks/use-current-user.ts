@@ -1,21 +1,15 @@
-import { useSuspenseQuery } from "@tanstack/react-query"
-import { authClient } from "@/lib/auth-client"
+import { mockUser } from "@/lib/data"
 
 export const currentUserQueryOptions = {
   queryKey: ["current-user"],
-  queryFn: async () => {
-    const session = await authClient.getSession()
-    return session.data?.user ?? null
-  },
+  queryFn: async () => mockUser,
   staleTime: Infinity,
 }
 
-export function useCurrentUserId(): string | null {
-  const { data: user } = useSuspenseQuery(currentUserQueryOptions)
-  return user?.id ?? null
+export function useCurrentUserId(): string {
+  return mockUser.id
 }
 
 export function useCurrentUser() {
-  const { data: user } = useSuspenseQuery(currentUserQueryOptions)
-  return user
+  return mockUser
 }

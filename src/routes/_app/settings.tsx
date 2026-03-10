@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
@@ -14,7 +14,6 @@ import {
   Camera01Icon,
 } from "@hugeicons/core-free-icons"
 import { useCurrentUser } from "@/stores/app-store"
-import { useSession, signOut } from "@/lib/auth-client"
 import { seo } from "@/lib/seo"
 
 export const Route = createFileRoute("/_app/settings")({
@@ -26,11 +25,7 @@ export const Route = createFileRoute("/_app/settings")({
 
 function SettingsPage() {
   const navigate = useNavigate()
-  const { data: session } = useSession()
-  const currentUser = useCurrentUser()
-
-  // Use session user data if available, fallback to mock user
-  const user = session?.user ?? currentUser
+  const user = useCurrentUser()
 
   const [name, setName] = useState(user.name || "")
   const [username, setUsername] = useState(user.username || "")
@@ -38,14 +33,6 @@ function SettingsPage() {
   const [isSaving, setIsSaving] = useState(false)
   const [saveError, setSaveError] = useState<string | null>(null)
   const [saveSuccess, setSaveSuccess] = useState(false)
-
-  useEffect(() => {
-    if (session?.user) {
-      setName(session.user.name || "")
-      setUsername(session.user.username || "")
-      setBio(session.user.bio || "")
-    }
-  }, [session?.user])
 
   function handleSave() {
     setIsSaving(true)
@@ -59,8 +46,7 @@ function SettingsPage() {
     }, 500)
   }
 
-  async function handleLogout() {
-    await signOut()
+  function handleLogout() {
     navigate({ to: "/sign-in", search: { redirect: undefined } })
   }
 
